@@ -5,12 +5,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cors());
 
 // api routes
 app.use('/users', require('./users/users.controller'));
+app.use('/drivers', require('./drivers/driver.controller'));
+app.use('/cars', require('./cars/cars.controller'));
+
+// static
+app.use(express.static('uploads'));
 
 // global error handler
 app.use(errorHandler);
